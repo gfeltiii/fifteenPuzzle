@@ -20,94 +20,98 @@
     background-image: url("./img/cat_1.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat1{
     background-image: url("./img/cat_2.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat2{
     background-image: url("./img/cat_3.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat3{
     background-image: url("./img/cat_4.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat4{
     background-image: url("./img/cat_5.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat5{
     background-image: url("./img/cat_6.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat6{
     background-image: url("./img/cat_7.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat7{
     background-image: url("./img/cat_8.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat8{
     background-image: url("./img/cat_9.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat9{
     background-image: url("./img/cat_10.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat10{
     background-image: url("./img/cat_11.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat11{
     background-image: url("./img/cat_12.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat12{
     background-image: url("./img/cat_13.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat13{
     background-image: url("./img/cat_14.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .cat14{
     background-image: url("./img/cat_15.jpg");
     background-repeat:no-repeat;
     background-size: 100%;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .free{
     background-image: url("./img/free.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+}
+.neighbor:hover{
+    border: 3px solid #006600;
+    text-decoration: underline;
 }

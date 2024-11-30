@@ -46,25 +46,48 @@ function shuffleBoard(){
 
 //basic array shuffling method
 function shuffle(array){
-    let currentIndex = array.length;
-    while (currentIndex != 0) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+    
+    let currentIndex;
+    for(let i=0; i<100; i++){
+        currentIndex = array.findIndex(x => x=="free");
+      let randomIndex = moves[currentIndex][Math.floor(Math.random() * moves[currentIndex].length)];
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
-    }
+      }
+    checkNeighbors();
 }
 
 //if the piece clicked on is adjacent to a free space, they switch class information
 function slide(){
     for(let i=0; i<moves[this.id].length; i++){
         if($(moves[parseInt(this.id)][i]).className=="free"){
+            clearNeighbors();
             $(moves[this.id][i]).className="";
             $(moves[this.id][i]).innerHTML=this.innerHTML;
             $(moves[this.id][i]).classList.add(this.className);
             this.className="";
             this.innerHTML="";
             this.classList.add("free");
+            checkNeighbors();
         }
+    }
+}
+
+function checkNeighbors(){
+    var ele= document.getElementById("puzzleBoard");
+    var freeSpot;
+    for(const child of ele.children){
+        if(child.className=="free"){
+            freeSpot=child.id;
+        }
+    }
+    for(let i=0; i<moves[freeSpot].length; i++){
+        $(moves[freeSpot][i]).classList.add("neighbor");
+    }
+}
+function clearNeighbors(){
+    var ele= document.getElementById("puzzleBoard");
+    for(const child of ele.children){
+        child.classList.remove("neighbor");
     }
 }
