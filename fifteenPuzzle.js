@@ -4,10 +4,11 @@ const moves = [
     ["4","9","12"], ["5","8","10","13"],["6","9","11","14"],["7","10","15"],    /*with 0 in the top left corner and going left-right up-down */
     ["8","13"],     ["9","12","14"],    ["10","13","15"],   ["11","14"]];
 
-let pieces =    ["cat0","cat1","cat2","cat3",                                   /*Pieces is a array that holds the class for each position on */
-                "cat4","cat5","cat6","cat7",                                    /*the board, free space indicates the space without any image */
-                "cat8","cat9","cat10","cat11",
-                "cat12","cat13","cat14","free"];
+let pieces =    ["0","1","2","3",                                   /*Pieces is a array that holds the class for each position on */
+                "4","5","6","7",                                    /*the board, free space indicates the space without any image */
+                "8","9","10","11",
+                "12","13","14","free"];
+let puzzle = "cat";
 
 //these functions make writing the code easeir one $ for just one element, $$ for all elements
 function $(id){
@@ -20,13 +21,15 @@ function $$(query){
 //ON LOAD: the pieces are loaded in the default and given the ability to slide
 window.onload = function() {
     let puzzleBoard = $("puzzleBoard");
-    for(let i=0; i<16; i++){
-        puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+pieces[i]+"'>"+(parseInt(pieces[i].substring(3))+1)+"</div>";   
+    for(let i=0; i<15; i++){
+        puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+puzzle+i+"'>"+(i+1)+"</div>";   
     }
+    puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='15' class='free'></div>";
     var ele= document.getElementById("puzzleBoard");
     for(const child of ele.children){
         child.onmousedown=slide;
     }
+    checkNeighbors();
 }
 
 //shuffles pieces array and displays the new puzzle
@@ -35,13 +38,15 @@ function shuffleBoard(){
     let puzzleBoard = $("puzzleBoard");
     puzzleBoard.innerHTML = "";
     for(let i=0; i<16; i++){
-        puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+pieces[i]+"'>"+(parseInt(pieces[i].substring(3))+1)+"</div>";
+        if(pieces[i]!="free")
+        puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+puzzle+pieces[i]+"'>"+(parseInt(pieces[i])+1)+"</div>";
+        else puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+pieces[i]+"'></div>"
     }
     var ele= document.getElementById("puzzleBoard");
     for(const child of ele.children){
         child.onmousedown=slide;
     }
-    
+    checkNeighbors();
 }
 
 //basic array shuffling method
@@ -68,6 +73,7 @@ function slide(){
             this.className="";
             this.innerHTML="";
             this.classList.add("free");
+            checkWin();
             checkNeighbors();
         }
     }
@@ -89,5 +95,34 @@ function clearNeighbors(){
     var ele= document.getElementById("puzzleBoard");
     for(const child of ele.children){
         child.classList.remove("neighbor");
+    }
+}
+function checkWin(){
+    for(let i=0; i<15; i++){
+
+    }
+}
+function changeBoard(){
+    $("boards").className="";
+    $("boards").classList.add("boards");
+    $("boards").innerHTML=
+    "<h2>Choose Your Board</h2>"+
+    "<img src='./img/cat.jpg' width='100px' id='cat'>&nbsp;&nbsp;"+
+    "<img src='./img/pengs.jpg' width='100px' id='penguin'>&nbsp;&nbsp;"+
+    "<img src='./img/fish.jpg' width='100px' id='fish'>&nbsp;&nbsp;"+
+    "<img src='./img/frog.jpg' width='100px' id='frog'>";
+    $("cat").onmousedown=$('frog').onmousedown=$('penguin').onmousedown=$('fish').onmousedown = function() {
+            const temp=puzzle;
+            puzzle=this.id;
+            $("boards").className="";
+            $("boards").classList.add("boardsClear");
+            $("boards").innerHTML="";
+            var ele= document.getElementById("puzzleBoard");
+            clearNeighbors();
+            for(const child of ele.children){
+                if(child.className!="free")
+                    child.className=puzzle+child.className.substring(temp.length);
+            }
+            checkNeighbors();
     }
 }

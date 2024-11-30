@@ -6,112 +6,305 @@
     grid-template-columns: 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px 100px;
 }
-.puzzleBoard{
-    cursor: pointer;
-}
+
 .puzzleBoard > div{
     color: white;
     font-size: 32pt;
     text-align: center;
     text-justify: center;
     align-items: center;
-}
-.cat0{
-    background-image: url("./img/cat_1.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat1{
-    background-image: url("./img/cat_2.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat2{
-    background-image: url("./img/cat_3.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat3{
-    background-image: url("./img/cat_4.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat4{
-    background-image: url("./img/cat_5.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat5{
-    background-image: url("./img/cat_6.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat6{
-    background-image: url("./img/cat_7.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat7{
-    background-image: url("./img/cat_8.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat8{
-    background-image: url("./img/cat_9.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat9{
-    background-image: url("./img/cat_10.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat10{
-    background-image: url("./img/cat_11.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat11{
-    background-image: url("./img/cat_12.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat12{
-    background-image: url("./img/cat_13.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat13{
-    background-image: url("./img/cat_14.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.cat14{
-    background-image: url("./img/cat_15.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 3px solid black;
-}
-.free{
-    background-image: url("./img/free.jpg");
+    position: relative;
+    border: 2px solid black;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 400px;
+    cursor: pointer;
 }
 .neighbor:hover{
-    border: 3px solid #006600;
+    border: 2px solid #006600;
     text-decoration: underline;
 }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.boards{
+    background-color: grey;
+    color:white;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 8px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 5vw;
+    max-width: fit-content;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+.boards > img{
+    cursor: pointer;
+}
+.boardsClear{
+    opacity: 0;
+    width: 0;
+    z-index: -5000; 
+}
+
+
+
+
+
+
+
+
+/*-------------- img css -------------------*/
+.cat0{
+    background-image: url("./img/cat.jpg");
+    background-position: 0px 0px;
+}
+.cat1{
+    background-image: url("./img/cat.jpg");
+    background-position: -100px 0px;
+}
+.cat2{
+    background-image: url("./img/cat.jpg");
+    background-position: -200px 0px;
+}
+.cat3{
+    background-image: url("./img/cat.jpg");
+    background-position: -300px 0px;
+}
+.cat4{
+    background-image: url("./img/cat.jpg");
+    background-position: 0px -100px;
+}
+.cat5{
+    background-image: url("./img/cat.jpg");
+    background-position: -100px -100px;
+}
+.cat6{
+    background-image: url("./img/cat.jpg");
+    background-position: -200px -100px;
+}
+.cat7{
+    background-image: url("./img/cat.jpg");
+    background-position: -300px -100px;
+}
+.cat8{
+    background-image: url("./img/cat.jpg");
+    background-position: 0px -200px;
+}
+.cat9{
+    background-image: url("./img/cat.jpg");
+    background-position: -100px -200px;
+}
+.cat10{
+    background-image: url("./img/cat.jpg");
+    background-position: -200px -200px;
+}
+.cat11{
+    background-image: url("./img/cat.jpg");
+    background-position: -300px -200px;
+}
+.cat12{
+    background-image: url("./img/cat.jpg");
+    background-position: 0px -300px;
+}
+.cat13{
+    background-image: url("./img/cat.jpg");
+    background-position: -100px -300px;
+}
+.cat14{
+    background-image: url("./img/cat.jpg");
+    background-position: -200px -300px;
+}
+
+
+.fish0{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px 0px;
+}
+.fish1{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px 0px;
+}
+.fish2{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px 0px;
+}
+.fish3{
+    background-image: url("./img/fish.jpg");
+    background-position: -300px 0px;
+}
+.fish4{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px -100px;
+}
+.fish5{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px -100px;
+}
+.fish6{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px -100px;
+}
+.fish7{
+    background-image: url("./img/fish.jpg");
+    background-position: -300px -100px;
+}
+.fish8{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px -200px;
+}
+.fish9{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px -200px;
+}
+.fish10{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px -200px;
+}
+.fish11{
+    background-image: url("./img/fish.jpg");
+    background-position: -300px -200px;
+}
+.fish12{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px -300px;
+}
+.fish13{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px -300px;
+}
+.fish14{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px -300px;
+}
+
+.frog0{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px 0px;
+}
+.frog1{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px 0px;
+}
+.frog2{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px 0px;
+}
+.frog3{
+    background-image: url("./img/frog.jpg");
+    background-position: -300px 0px;
+}
+.frog4{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px -100px;
+}
+.frog5{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px -100px;
+}
+.frog6{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px -100px;
+}
+.frog7{
+    background-image: url("./img/frog.jpg");
+    background-position: -300px -100px;
+}
+.frog8{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px -200px;
+}
+.frog9{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px -200px;
+}
+.frog10{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px -200px;
+}
+.frog11{
+    background-image: url("./img/frog.jpg");
+    background-position: -300px -200px;
+}
+.frog12{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px -300px;
+}
+.frog13{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px -300px;
+}
+.frog14{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px -300px;
+}
+
+.penguin0{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px 0px;
+}
+.penguin1{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px 0px;
+}
+.penguin2{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px 0px;
+}
+.penguin3{
+    background-image: url("./img/pengs.jpg");
+    background-position: -300px 0px;
+}
+.penguin4{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px -100px;
+}
+.penguin5{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px -100px;
+}
+.penguin6{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px -100px;
+}
+.penguin7{
+    background-image: url("./img/pengs.jpg");
+    background-position: -300px -100px;
+}
+.penguin8{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px -200px;
+}
+.penguin9{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px -200px;
+}
+.penguin10{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px -200px;
+}
+.penguin11{
+    background-image: url("./img/pengs.jpg");
+    background-position: -300px -200px;
+}
+.penguin12{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px -300px;
+}
+.penguin13{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px -300px;
+}
+.penguin14{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px -300px;
+}
+
+
