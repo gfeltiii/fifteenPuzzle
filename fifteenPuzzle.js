@@ -110,20 +110,18 @@ function checkWin() {
         bestInfo.innerHTML = `Best Time: ${bestTime} | Best Moves: ${bestMoves}`;
         gameInfo.appendChild(bestInfo);
 
-        // Start a new game after a short delay (to let the user read the message)
-        setTimeout(() => {
-            resetGame();
-        }, 5000);
-
         // Trigger the rainbow animation effect
         document.body.classList.add("flashRainbow");
-        setTimeout(() => {
-            document.body.classList.remove("flashRainbow");
-        }, 10000);  // Rainbow effect lasts for 10 seconds
     }
 }
 
 function resetGame() {
+    // Remove win message if it exists
+    const winMessage = document.getElementById("winMessage");
+    if (winMessage) {
+        winMessage.remove();  // Remove the win message from the DOM
+    }
+    document.body.classList.remove("flashRainbow");
     // Reset the move count and timer
     moveCount = 0;
     document.getElementById("moveCount").textContent = moveCount;
@@ -133,6 +131,7 @@ function resetGame() {
     // Reset the puzzle to its starting state
     shuffleBoard();
 }
+
 
 
 // Play sound effect
