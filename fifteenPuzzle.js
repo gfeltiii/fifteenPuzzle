@@ -9,6 +9,9 @@ let pieces =    ["0","1","2","3",                                   /*Pieces is 
                 "8","9","10","11",
                 "12","13","14","free"];
 let puzzle = "cat";
+let moveCount = 0;
+let timer = null;
+let timeElapsed = 0;
 
 //these functions make writing the code easeir one $ for just one element, $$ for all elements
 function $(id){
@@ -16,6 +19,94 @@ function $(id){
 }
 function $$(query){
     return document.querySelectorAll(query);
+}
+
+// Timer function
+function startTimer() {
+    if (timer) clearInterval(timer);
+    timeElapsed = 0;
+    updateTimeDisplay();  // Initial call to set the time to 00:00
+    timer = setInterval(() => {
+        timeElapsed++;
+        updateTimeDisplay();
+    }, 1000);
+}
+
+function updateTimeDisplay() {
+    const minutes = Math.floor(timeElapsed / 60);
+    const seconds = timeElapsed % 60;
+    const formattedTime = `${pad(minutes)}:${pad(seconds)}`;
+    document.getElementById("timeElapsed").textContent = formattedTime;
+}
+
+function pad(number) {
+    return number < 10 ? "0" + number : number;  // Adds leading zero if needed
+}
+
+function stopTimer() {
+    if (timer) clearInterval(timer);
+}
+
+// Function to format time in mm:ss format
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${pad(minutes)}:${pad(remainingSeconds)}`;
+}
+
+// Parse time from mm:ss to seconds
+function parseTime(time) {
+    const [minutes, seconds] = time.split(":").map(Number);
+    return minutes * 60 + seconds;
+}
+
+function checkWin() {
+    let isSolved = true;
+
+    // Loop through each piece and check if it is in the correct position
+    const puzzleBoard = document.getElementById("puzzleBoard");
+    const piecesInDOM = puzzleBoard.children; // Get all puzzle pieces
+
+    for (let i = 0; i < piecesInDOM.length; i++) {
+        const piece = piecesInDOM[i];
+        
+        // We expect the puzzle to be in the order 0, 1, 2, ..., 14, and the last div (id 15) should have the "free" class
+        if (piece.id !== "15" && parseInt(piece.innerHTML) !== i + 1) { // We check the numbers, assuming 1-15 are the puzzle pieces
+            isSolved = false;
+            break;
+        } else if (piece.id === "15" && piece.className !== "free") {
+            // The "free" space should have the "free" class at position 15
+            isSolved = false;
+            break;
+        }
+    }
+
+    // If all pieces are in the correct order, stop the timer and alert the user
+    if (isSolved) {
+        stopTimer();
+        // Display the "You won!" message
+        const gameInfo = document.getElementById("gameInfo");
+        const winMessage = document.createElement("div");
+        winMessage.id = "winMessage";
+        winMessage.innerHTML = `<h2>Congratulations!</h2><p>You solved the puzzle in ${formatTime(timeElapsed)} and ${moveCount} moves!</p>`;
+        gameInfo.appendChild(winMessage);
+
+
+        // Add the flashRainbow class to the body to trigger the rainbow effect
+        document.body.classList.add("flashRainbow");
+
+        // Stop the rainbow animation after 10 seconds
+        setTimeout(() => {
+            document.body.classList.remove("flashRainbow");
+        }, 10000);  // The rainbow effect will last for 10 seconds
+    }
+}
+
+
+// Play sound effect
+function playSound() {
+    const soundEffect = document.getElementById("soundEffect");
+    soundEffect.play();
 }
 
 //ON LOAD: the pieces are loaded in the default and given the ability to slide
@@ -47,6 +138,7 @@ function shuffleBoard(){
         child.onmousedown=slide;
     }
     checkNeighbors();
+    startTimer();
 }
 
 //basic array shuffling method
@@ -63,16 +155,38 @@ function shuffle(array){
 }
 
 //if the piece clicked on is adjacent to a free space, they switch class information
-function slide(){
-    for(let i=0; i<moves[this.id].length; i++){
-        if($(moves[parseInt(this.id)][i]).className=="free"){
+function slide() {
+    for (let i = 0; i < moves[this.id].length; i++) {
+        if ($(moves[this.id][i]).className === "free") {
             clearNeighbors();
-            $(moves[this.id][i]).className="";
-            $(moves[this.id][i]).innerHTML=this.innerHTML;
-            $(moves[this.id][i]).classList.add(this.className);
-            this.className="";
-            this.innerHTML="";
+
+            // Swap the "free" space and the clicked piece
+            const clickedPiece = this.id;
+            const freeSpot = moves[this.id][i];
+
+            // Swap in the `pieces` array
+            const clickedIndex = pieces.indexOf(clickedPiece);
+            const freeIndex = pieces.indexOf("free");
+
+            // Swap the pieces in the array
+            [pieces[clickedIndex], pieces[freeIndex]] = [pieces[freeIndex], pieces[clickedIndex]];
+
+            // Update the visual representation (HTML)
+            $(freeSpot).className = "";
+            $(freeSpot).innerHTML = this.innerHTML;
+            $(freeSpot).classList.add(this.className);
+            this.className = "";
+            this.innerHTML = "";
             this.classList.add("free");
+
+            // Increment the move count and update the display
+            moveCount++;
+            document.getElementById("moveCount").textContent = moveCount;
+
+            // Play sound
+            playSound();
+
+            // Check if the puzzle is solved
             checkWin();
             checkNeighbors();
         }
@@ -97,11 +211,7 @@ function clearNeighbors(){
         child.classList.remove("neighbor");
     }
 }
-function checkWin(){
-    for(let i=0; i<15; i++){
 
-    }
-}
 function changeBoard(){
     $("boards").className="";
     $("boards").classList.add("boards");
