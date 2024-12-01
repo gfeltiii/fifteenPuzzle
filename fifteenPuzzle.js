@@ -12,6 +12,9 @@ let puzzle = "cat";
 let moveCount = 0;
 let timer = null;
 let timeElapsed = 0;
+let bestTime = null;  // Store best time
+let bestMoves = null; // Store best moves
+
 
 //these functions make writing the code easeir one $ for just one element, $$ for all elements
 function $(id){
@@ -84,22 +87,51 @@ function checkWin() {
     // If all pieces are in the correct order, stop the timer and alert the user
     if (isSolved) {
         stopTimer();
-        // Display the "You won!" message
+        // Update best time and moves if this game is better
+        const currentTime = formatTime(timeElapsed);
+        const currentMoves = moveCount;
+
+        if (bestTime === null || timeElapsed < parseTime(bestTime)) {
+            bestTime = currentTime;
+        }
+        if (bestMoves === null || moveCount < bestMoves) {
+            bestMoves = currentMoves;
+        }
+
+        // Display "You won!" message with current time and moves
         const gameInfo = document.getElementById("gameInfo");
         const winMessage = document.createElement("div");
         winMessage.id = "winMessage";
-        winMessage.innerHTML = `<h2>Congratulations!</h2><p>You solved the puzzle in ${formatTime(timeElapsed)} and ${moveCount} moves!</p>`;
+        winMessage.innerHTML = `<h2>Congratulations!</h2><p>You solved the puzzle in ${currentTime} and ${currentMoves} moves!</p>`;
         gameInfo.appendChild(winMessage);
 
+        // Display the best time and moves under the current ones
+        const bestInfo = document.createElement("p");
+        bestInfo.innerHTML = `Best Time: ${bestTime} | Best Moves: ${bestMoves}`;
+        gameInfo.appendChild(bestInfo);
 
-        // Add the flashRainbow class to the body to trigger the rainbow effect
+        // Start a new game after a short delay (to let the user read the message)
+        setTimeout(() => {
+            resetGame();
+        }, 5000);
+
+        // Trigger the rainbow animation effect
         document.body.classList.add("flashRainbow");
-
-        // Stop the rainbow animation after 10 seconds
         setTimeout(() => {
             document.body.classList.remove("flashRainbow");
-        }, 10000);  // The rainbow effect will last for 10 seconds
+        }, 10000);  // Rainbow effect lasts for 10 seconds
     }
+}
+
+function resetGame() {
+    // Reset the move count and timer
+    moveCount = 0;
+    document.getElementById("moveCount").textContent = moveCount;
+    timeElapsed = 0;
+    document.getElementById("timeElapsed").textContent = "00:00";
+
+    // Reset the puzzle to its starting state
+    shuffleBoard();
 }
 
 
@@ -124,22 +156,24 @@ window.onload = function() {
 }
 
 //shuffles pieces array and displays the new puzzle
-function shuffleBoard(){
+function shuffleBoard() {
     shuffle(pieces);
     let puzzleBoard = $("puzzleBoard");
     puzzleBoard.innerHTML = "";
-    for(let i=0; i<16; i++){
-        if(pieces[i]!="free")
-        puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+puzzle+pieces[i]+"'>"+(parseInt(pieces[i])+1)+"</div>";
-        else puzzleBoard.innerHTML=puzzleBoard.innerHTML + "<div id='"+(i)+"' class='"+pieces[i]+"'></div>"
+    for (let i = 0; i < 16; i++) {
+        if (pieces[i] != "free")
+            puzzleBoard.innerHTML = puzzleBoard.innerHTML + "<div id='" + (i) + "' class='" + puzzle + pieces[i] + "'>" + (parseInt(pieces[i]) + 1) + "</div>";
+        else puzzleBoard.innerHTML = puzzleBoard.innerHTML + "<div id='" + (i) + "' class='" + pieces[i] + "'></div>"
     }
-    var ele= document.getElementById("puzzleBoard");
-    for(const child of ele.children){
-        child.onmousedown=slide;
+
+    var ele = document.getElementById("puzzleBoard");
+    for (const child of ele.children) {
+        child.onmousedown = slide;
     }
     checkNeighbors();
-    startTimer();
+    startTimer(); // Start the timer
 }
+
 
 //basic array shuffling method
 function shuffle(array){
