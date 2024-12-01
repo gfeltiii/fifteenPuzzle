@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>15 Puzzle</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <script src="fifteenPuzzle.js"></script>
 </head>
 <body>
@@ -9,6 +9,13 @@
         <h1>Solve the Puzzle!</h1>
     <div id="boards"></div></div>
     <div id="puzzleBoard" class="puzzleBoard"></div>
+    <div id="gameInfo">
+        <p>Time Elapsed: <span id="timeElapsed">00:00</span> seconds</p>
+        <p>Moves: <span id="moveCount">0</span></p>
+    </div>
     <button onclick="shuffleBoard()">Start Game</button>
     <button onclick="changeBoard()">Change Board</button>
+    <audio id="music" src="gamemusic.mp3" autoplay loop></audio>
+    <audio id="soundEffect" src="whoosh.mp3"></audio>
 </body>
+
