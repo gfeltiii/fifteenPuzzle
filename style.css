@@ -13,6 +13,7 @@
     text-align: center;
     text-justify: center;
     align-items: center;
+    line-height: 100px;
     position: relative;
     border: 2px solid black;
     background-repeat: no-repeat;
@@ -64,10 +65,78 @@ button:hover{
     background-color: lightblue;
     cursor: pointer;
 }
+#gameInfo {
+    background-color: #f0f0f0;        
+    padding: 20px;
+    border-radius: 10px;
+    width: 320px;                      
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-size: 18px;
+    text-align: center;
+    margin: auto;
+    z-index: 1;
+}
+
+#gameInfo p {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+#winMessage {
+    background-color: #dff0d8;
+    border: 2px solid #4cae4c;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 22px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 9999; 
+}
+
+#winMessage h2 {
+    color: #4cae4c;
+    margin-bottom: 10px;
+}
 
 
+@keyframes rainbowFlash {
+    0% {
+        background-color: red;
+    }
+    14% {
+        background-color: orange;
+    }
+    28% {
+        background-color: yellow;
+    }
+    42% {
+        background-color: green;
+    }
+    57% {
+        background-color: blue;
+    }
+    71% {
+        background-color: indigo;
+    }
+    85% {
+        background-color: violet;
+    }
+    100% {
+        background-color: red;
+    }
+}
 
-
+body.flashRainbow {
+    animation: rainbowFlash 2s linear infinite;
+}
 
 
 /*-------------- img css -------------------*/
