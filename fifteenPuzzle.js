@@ -68,3 +68,46 @@ function slide(){
         }
     }
 }
+
+function changeBoardSize() {
+    const boardSize = parseInt(document.getElementById("boardSize").value);
+    const totalPieces = boardSize * boardSize - 1; // Total pieces minus the free space
+    const puzzleBoard = document.getElementById("puzzleBoard");
+
+    // Dynamically set grid dimensions
+    puzzleBoard.style.gridTemplateColumns = `repeat(${boardSize}, 100px)`;
+    puzzleBoard.style.gridTemplateRows = `repeat(${boardSize}, 100px)`;
+
+    // Generate pieces array dynamically
+    let pieces = [];
+    for (let i = 0; i < totalPieces; i++) {
+        pieces.push(`cat${i}`);
+    }
+    pieces.push("free"); // Add the free space
+
+    // Update the board
+    loadPuzzle(pieces, boardSize);
+}
+
+function loadPuzzle(pieces, boardSize) {
+    const puzzleBoard = document.getElementById("puzzleBoard");
+    puzzleBoard.innerHTML = ""; // Clear previous puzzle
+
+    puzzleBoard.classList.remove("puzzle3x3");
+    if (boardSize === 3) {
+        puzzleBoard.classList.add("puzzle3x3");
+    }
+
+    for (let i = 0; i < pieces.length; i++) {
+        const pieceDiv = document.createElement("div");
+        pieceDiv.id = i.toString();
+        pieceDiv.className = pieces[i];
+        pieceDiv.innerText = pieces[i] === "free" ? "" : parseInt(pieces[i].substring(3)) + 1;
+        pieceDiv.onmousedown = boardSize === 3 ? slide3x3 : slide;
+        puzzleBoard.appendChild(pieceDiv);
+    }
+
+    // Adjust moves array for the current board size
+    createMovesArray(boardSize);
+}
+
