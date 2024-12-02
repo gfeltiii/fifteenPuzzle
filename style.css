@@ -6,6 +6,7 @@
     grid-template-columns: 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px 100px;
 }
+
 .puzzleBoard{
     cursor: pointer;
     margin: 3px;
@@ -20,105 +21,383 @@
     grid-template-rows: repeat(3, 100px);
 }
 
+
 .puzzleBoard > div{
     color: white;
     font-size: 32pt;
     text-align: center;
     text-justify: center;
     align-items: center;
+    line-height: 100px;
+    position: relative;
+    border: 2px solid black;
+    background-repeat: no-repeat;
+    background-size: 400px;
+    cursor: pointer;
 }
+.neighbor:hover{
+    border: 2px solid #006600;
+    text-decoration: underline;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.boards{
+    background-color: grey;
+    color:white;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 8px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 5vw;
+    max-width: fit-content;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+.boards > img{
+    cursor: pointer;
+}
+.boardsClear{
+    opacity: 0;
+    width: 0;
+    z-index: -5000; 
+}
+button{
+    font-size: 20px;
+    display: block;
+    margin: auto;
+    padding: 5px;
+    margin-top: 10px;
+}
+button:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
+#gameInfo {
+    background-color: #f0f0f0;        
+    padding: 20px;
+    border-radius: 10px;
+    width: 320px;                      
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-size: 18px;
+    text-align: center;
+    margin: auto;
+    z-index: 1;
+}
+
+#gameInfo p {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+#winMessage {
+    background-color: #dff0d8;
+    border: 2px solid #4cae4c;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 22px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 9999; 
+}
+
+#winMessage h2 {
+    color: #4cae4c;
+    margin-bottom: 10px;
+}
+
+
+@keyframes rainbowFlash {
+    0% {
+        background-color: red;
+    }
+    14% {
+        background-color: orange;
+    }
+    28% {
+        background-color: yellow;
+    }
+    42% {
+        background-color: green;
+    }
+    57% {
+        background-color: blue;
+    }
+    71% {
+        background-color: indigo;
+    }
+    85% {
+        background-color: violet;
+    }
+    100% {
+        background-color: red;
+    }
+}
+
+body.flashRainbow {
+    animation: rainbowFlash 2s linear infinite;
+}
+
+
+/*-------------- img css -------------------*/
 .cat0{
-    background-image: url("./img/cat_1.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: 0px 0px;
 }
 .cat1{
-    background-image: url("./img/cat_2.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -100px 0px;
 }
 .cat2{
-    background-image: url("./img/cat_3.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -200px 0px;
 }
 .cat3{
-    background-image: url("./img/cat_4.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -300px 0px;
 }
 .cat4{
-    background-image: url("./img/cat_5.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: 0px -100px;
 }
 .cat5{
-    background-image: url("./img/cat_6.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -100px -100px;
 }
 .cat6{
-    background-image: url("./img/cat_7.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -200px -100px;
 }
 .cat7{
-    background-image: url("./img/cat_8.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -300px -100px;
 }
 .cat8{
-    background-image: url("./img/cat_9.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: 0px -200px;
 }
 .cat9{
-    background-image: url("./img/cat_10.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -100px -200px;
 }
 .cat10{
-    background-image: url("./img/cat_11.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -200px -200px;
 }
 .cat11{
-    background-image: url("./img/cat_12.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -300px -200px;
 }
 .cat12{
-    background-image: url("./img/cat_13.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: 0px -300px;
 }
 .cat13{
-    background-image: url("./img/cat_14.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -100px -300px;
 }
 .cat14{
-    background-image: url("./img/cat_15.jpg");
-    background-repeat:no-repeat;
-    background-size: 100%;
-    border: 1px solid black;
+    background-image: url("./img/cat.jpg");
+    background-position: -200px -300px;
 }
-.free{
-    background-image: url("./img/free.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+
+
+.fish0{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px 0px;
 }
+.fish1{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px 0px;
+}
+.fish2{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px 0px;
+}
+.fish3{
+    background-image: url("./img/fish.jpg");
+    background-position: -300px 0px;
+}
+.fish4{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px -100px;
+}
+.fish5{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px -100px;
+}
+.fish6{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px -100px;
+}
+.fish7{
+    background-image: url("./img/fish.jpg");
+    background-position: -300px -100px;
+}
+.fish8{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px -200px;
+}
+.fish9{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px -200px;
+}
+.fish10{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px -200px;
+}
+.fish11{
+    background-image: url("./img/fish.jpg");
+    background-position: -300px -200px;
+}
+.fish12{
+    background-image: url("./img/fish.jpg");
+    background-position: 0px -300px;
+}
+.fish13{
+    background-image: url("./img/fish.jpg");
+    background-position: -100px -300px;
+}
+.fish14{
+    background-image: url("./img/fish.jpg");
+    background-position: -200px -300px;
+}
+
+.frog0{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px 0px;
+}
+.frog1{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px 0px;
+}
+.frog2{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px 0px;
+}
+.frog3{
+    background-image: url("./img/frog.jpg");
+    background-position: -300px 0px;
+}
+.frog4{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px -100px;
+}
+.frog5{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px -100px;
+}
+.frog6{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px -100px;
+}
+.frog7{
+    background-image: url("./img/frog.jpg");
+    background-position: -300px -100px;
+}
+.frog8{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px -200px;
+}
+.frog9{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px -200px;
+}
+.frog10{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px -200px;
+}
+.frog11{
+    background-image: url("./img/frog.jpg");
+    background-position: -300px -200px;
+}
+.frog12{
+    background-image: url("./img/frog.jpg");
+    background-position: 0px -300px;
+}
+.frog13{
+    background-image: url("./img/frog.jpg");
+    background-position: -100px -300px;
+}
+.frog14{
+    background-image: url("./img/frog.jpg");
+    background-position: -200px -300px;
+}
+
+.penguin0{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px 0px;
+}
+.penguin1{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px 0px;
+}
+.penguin2{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px 0px;
+}
+.penguin3{
+    background-image: url("./img/pengs.jpg");
+    background-position: -300px 0px;
+}
+.penguin4{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px -100px;
+}
+.penguin5{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px -100px;
+}
+.penguin6{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px -100px;
+}
+.penguin7{
+    background-image: url("./img/pengs.jpg");
+    background-position: -300px -100px;
+}
+.penguin8{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px -200px;
+}
+.penguin9{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px -200px;
+}
+.penguin10{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px -200px;
+}
+.penguin11{
+    background-image: url("./img/pengs.jpg");
+    background-position: -300px -200px;
+}
+.penguin12{
+    background-image: url("./img/pengs.jpg");
+    background-position: 0px -300px;
+}
+.penguin13{
+    background-image: url("./img/pengs.jpg");
+    background-position: -100px -300px;
+}
+.penguin14{
+    background-image: url("./img/pengs.jpg");
+    background-position: -200px -300px;
+}
+
+
