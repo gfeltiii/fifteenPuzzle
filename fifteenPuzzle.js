@@ -14,6 +14,7 @@ let timer = null;
 let timeElapsed = 0;
 let bestTime = null;  // Store best time
 let bestMoves = null; // Store best moves
+let canWin= false;
 
 
 //these functions make writing the code easeir one $ for just one element, $$ for all elements
@@ -64,6 +65,7 @@ function parseTime(time) {
 }
 
 function checkWin() {
+    if(canWin){
     let isSolved = true;
 
     // Loop through each piece and check if it is in the correct position
@@ -82,6 +84,7 @@ function checkWin() {
             isSolved = false;
             break;
         }
+    
     }
 
     // If all pieces are in the correct order, stop the timer and alert the user
@@ -113,6 +116,7 @@ function checkWin() {
         // Trigger the rainbow animation effect
         document.body.classList.add("flashRainbow");
     }
+}
 }
 
 function resetGame() {
@@ -156,6 +160,8 @@ window.onload = function() {
 
 //shuffles pieces array and displays the new puzzle
 function shuffleBoard() {
+    pieces=["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","free"];
+    canWin=true;
     shuffle(pieces);
     let puzzleBoard = $("puzzleBoard");
     puzzleBoard.innerHTML = "";
