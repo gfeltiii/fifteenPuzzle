@@ -94,6 +94,9 @@ function checkWin() {
         const currentTime = formatTime(timeElapsed);
         const currentMoves = moveCount;
 
+        // Compare with the stored best time and moves
+        const bestInfo = document.getElementById("gameInfo").querySelector(".best-info");
+
         if (bestTime === null || timeElapsed < parseTime(bestTime)) {
             bestTime = currentTime;
         }
@@ -101,17 +104,22 @@ function checkWin() {
             bestMoves = currentMoves;
         }
 
+        if (bestInfo) {
+            bestInfo.innerHTML = `Best Time: ${bestTime} | Best Moves: ${bestMoves}`;
+        } else {
+            // Create and append new best info if it's the first time
+            const bestInfoDiv = document.createElement("p");
+            bestInfoDiv.classList.add("best-info");
+            bestInfoDiv.innerHTML = `Best Time: ${bestTime} | Best Moves: ${bestMoves}`;
+            document.getElementById("gameInfo").appendChild(bestInfoDiv);
+        }
+
         // Display "You won!" message with current time and moves
         const gameInfo = document.getElementById("gameInfo");
         const winMessage = document.createElement("div");
         winMessage.id = "winMessage";
-        winMessage.innerHTML = `<h2>Congratulations!</h2><p>You solved the puzzle in ${currentTime} and ${currentMoves} moves!</p>`;
+        winMessage.innerHTML = `<h2>Congratulations!</h2><h4>You solved the puzzle in ${currentTime} and ${currentMoves} moves!</h4><h6>Click Start Game to play again</h6>`;
         gameInfo.appendChild(winMessage);
-
-        // Display the best time and moves under the current ones
-        const bestInfo = document.createElement("p");
-        bestInfo.innerHTML = `Best Time: ${bestTime} | Best Moves: ${bestMoves}`;
-        gameInfo.appendChild(bestInfo);
 
         // Trigger the rainbow animation effect
         document.body.classList.add("flashRainbow");
