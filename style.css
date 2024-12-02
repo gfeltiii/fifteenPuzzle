@@ -7,6 +7,21 @@
     grid-template-rows: 100px 100px 100px 100px;
 }
 
+.puzzleBoard{
+    cursor: pointer;
+    margin: 3px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    gap: 3px;
+}
+
+#puzzleBoard.puzzle3x3 {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+}
+
+
 .puzzleBoard > div{
     color: white;
     font-size: 32pt;

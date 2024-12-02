@@ -2,16 +2,24 @@
 <head>
     <title>15 Puzzle</title>
     <link rel="stylesheet" href="style.css">
-    <script src="fifteenPuzzle.js"></script>
+    <script src="fifteenPuzzle.js" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>Solve the Puzzle!</h1>
     <div id="boards"></div></div>
+
     <div id="puzzleBoard" class="puzzleBoard"></div>
     <div id="gameInfo">
         <p>Time Elapsed: <span id="timeElapsed">00:00</span> seconds</p>
         <p>Moves: <span id="moveCount">0</span></p>
+    </div>
+    <div>
+        <label for="boardSize">Select Puzzle Size:</label>
+        <select id="boardSize" onchange="changeBoardSize()">
+            <option value="3" data-script="puzzle3x3.js">3x3</option>
+            <option value="4" data-script="fifteenPuzzle.js">4x4</option>
+        </select>
     </div>
     <button onclick="resetGame()">Start Game</button>
     <button onclick="changeBoard()">Change Board</button>
