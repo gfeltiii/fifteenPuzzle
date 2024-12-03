@@ -16,9 +16,33 @@
     gap: 3px;
 }
 
-#puzzleBoard.puzzle3x3 {
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+#puzzleBoard {
+    display: grid;
+    gap: 5px;
+}
+
+.puzzleBoard3x3 {
+    width: 300px;
+    height: 300px;
+}
+
+.puzzleBoard5x5 {
+    width: 500px;
+    height: 500px;
+}
+
+div.puzzlePiece {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: lightblue;
+}
+
+.free {
+    background-color: transparent;
 }
 
 
@@ -401,3 +425,20 @@ body.flashRainbow {
 }
 
 
+.piece {
+    background-image: url('./img/cat.jpg'); /* Replace with the path to your image */
+    background-size: cover;
+}
+
+/* For a 3x3 puzzle */
+.puzzle3x3-0 { background-position: 0% 0%; }
+.puzzle3x3-1 { background-position: 33.33% 0%; }
+.puzzle3x3-2 { background-position: 66.66% 0%; }
+.puzzle3x3-3 { background-position: 0% 33.33%; }
+.puzzle3x3-4 { background-position: 33.33% 33.33%; }
+.puzzle3x3-5 { background-position: 66.66% 33.33%; }
+.puzzle3x3-6 { background-position: 0% 66.66%; }
+.puzzle3x3-7 { background-position: 33.33% 66.66%; }
+.puzzle3x3-8 { background-position: 66.66% 66.66%; }
+
+/* Similar rules can be defined for 4x4 and 5x5 puzzles */

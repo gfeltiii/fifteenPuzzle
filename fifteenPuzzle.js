@@ -276,45 +276,81 @@ function changeBoard(){
     }
 }
 
-function changeBoardSize() {
-    const boardSize = parseInt(document.getElementById("boardSize").value);
-    const totalPieces = boardSize * boardSize - 1; // Total pieces minus the free space
+function changeBoardSize(gridSize) {
+    const totalPieces = gridSize * gridSize - 1; // Total pieces minus the free space
     const puzzleBoard = document.getElementById("puzzleBoard");
 
-    // Dynamically set grid dimensions
-    puzzleBoard.style.gridTemplateColumns = `repeat(${boardSize}, 100px)`;
-    puzzleBoard.style.gridTemplateRows = `repeat(${boardSize}, 100px)`;
+    // Generate and apply the new CSS for the chosen size
+    const imageUrl = "./img/cat.jpg"; // Replace with the dynamically chosen image if applicable
+    const styleTag = document.createElement("style");
+    styleTag.innerHTML = generateCSS(gridSize, imageUrl);
+    document.head.appendChild(styleTag);
 
-    // Generate pieces array dynamically
+    // Dynamically set grid dimensions
+    puzzleBoard.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
+    puzzleBoard.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
+
+    // Update pieces array for the chosen size
     let pieces = [];
     for (let i = 0; i < totalPieces; i++) {
         pieces.push(`cat${i}`);
     }
     pieces.push("free"); // Add the free space
 
-    // Update the board
-    loadPuzzle(pieces, boardSize);
+    // Load the new puzzle board
+    loadPuzzle(pieces, gridSize);
 }
+
+
+
+
+function createMovesArray(boardSize) {
+    moves = [];
+    for (let i = 0; i < boardSize * boardSize; i++) {
+        const adjacent = [];
+        if (i % boardSize !== 0) adjacent.push((i - 1).toString()); // Left
+        if (i % boardSize !== boardSize - 1) adjacent.push((i + 1).toString()); // Right
+        if (i >= boardSize) adjacent.push((i - boardSize).toString()); // Up
+        if (i < boardSize * (boardSize - 1)) adjacent.push((i + boardSize).toString()); // Down
+        moves.push(adjacent);
+    }
+}
+
 
 function loadPuzzle(pieces, boardSize) {
     const puzzleBoard = document.getElementById("puzzleBoard");
-    puzzleBoard.innerHTML = ""; // Clear previous puzzle
+    puzzleBoard.innerHTML = ""; // Clear the board
 
-    puzzleBoard.classList.remove("puzzle3x3");
-    if (boardSize === 3) {
-        puzzleBoard.classList.add("puzzle3x3");
-    }
+    puzzleBoard.style.gridTemplateColumns = `repeat(${boardSize}, 100px)`;
+    puzzleBoard.style.gridTemplateRows = `repeat(${boardSize}, 100px)`;
 
     for (let i = 0; i < pieces.length; i++) {
         const pieceDiv = document.createElement("div");
         pieceDiv.id = i.toString();
-        pieceDiv.className = pieces[i];
-        pieceDiv.innerText = pieces[i] === "free" ? "" : parseInt(pieces[i].substring(3)) + 1;
-        pieceDiv.onmousedown = boardSize === 3 ? slide3x3 : slide;
+        pieceDiv.className = pieces[i] === "free" ? "free" : `piece puzzle${boardSize}x${boardSize}-${i}`;
+        pieceDiv.innerText = pieces[i] === "free" ? "" : ""; // Optionally display numbers for debugging
+        pieceDiv.onmousedown = slide; // Attach the slide event
         puzzleBoard.appendChild(pieceDiv);
     }
-
-    // Adjust moves array for the current board size
-    createMovesArray(boardSize);
 }
+
+function generateCSS(gridSize, imageUrl) {
+    let css = "";
+    const pieceSize = 100 / gridSize; // Calculate size percentage per piece
+
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            const index = i * gridSize + j;
+            css += `
+            .cat${index} {
+                background-image: url("${imageUrl}");
+                background-size: ${gridSize * 100}px ${gridSize * 100}px;
+                background-position: ${pieceSize * j}% ${pieceSize * i}%;
+            }
+            `;
+        }
+    }
+    return css;
+}
+
 
